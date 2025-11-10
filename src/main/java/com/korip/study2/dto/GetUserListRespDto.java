@@ -1,4 +1,4 @@
-package com.korip.entity;
+package com.korip.study2.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,10 +7,9 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class User {
+public class GetUserListRespDto {
     private Integer userId;
     private String username;
-    private String password;
-    private Integer age;
+    private String email;
     private LocalDateTime createDt;
 }

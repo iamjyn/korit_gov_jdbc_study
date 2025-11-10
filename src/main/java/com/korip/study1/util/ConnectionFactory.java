@@ -1,6 +1,6 @@
-package com.korip.util;
+package com.korip.study1.util;
 
-import com.korip.config.DBConfig;
+import com.korip.study1.config.DBConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,7 +23,7 @@ public class ConnectionFactory {
     /*
     * DriverManager.getConnection()은 매번 새로운 연결을 만든다.
     * Connection은 값이 아니라 DB와의 세션/자원이므로 반드시 사용이 끝나면 close()
-    * 멤버변수로 등록해두고 오래 들고 있으면 아니된다.
+    * 멤버변수로 등록해두고 오래 들고 있으면 안된다.
     *
     * SQLException - 연결실패(잘못된 URL/계정, DB 다운, 방화벽 등)시 발생
     * */
