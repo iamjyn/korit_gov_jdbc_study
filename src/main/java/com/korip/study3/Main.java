@@ -48,7 +48,7 @@ public class Main {
                 while (true) {
                     System.out.print("제목 입력: ");
                     postReqDto.setTitle(scanner.nextLine());
-                    if (!postService.isValidDuplicatedTitle(postReqDto.getTitle())) {
+                    if (!postService.isDuplicatedTitle(postReqDto.getTitle())) {
                         break;
                     }
                     System.out.println("이미 작성된 title입니다.");
@@ -65,10 +65,14 @@ public class Main {
             } else if ("2".equals(selectMenu)) {
                 System.out.println("[ id 단건 조회 ]");
                 System.out.print("id 입력: ");
-                int id = scanner.nextInt();
+                Integer id = scanner.nextInt();
                 scanner.nextLine();
-                List<Post> postList = Collections.singletonList(postService.searchId(id));
-                postList.forEach(System.out::println);
+                Post post = postService.searchById(id);
+                if (post == null) {
+                    System.out.println("해당 게시물이 없습니다.");
+                } else {
+                    System.out.println("조회 결과: " + post);
+                }
             } else if ("3".equals(selectMenu)) {
                 System.out.println("[ username 검색 ]");
                 System.out.print("username 입력: ");

@@ -69,7 +69,7 @@ public class PostDao {
 
     // username으로 게시물 여러개 조회
     public List<Post> getPostListByUsername(String username) {
-        String sql = "SELECT * FROM post_tb WHERE username = ?;";
+        String sql = "SELECT * FROM post_tb WHERE username = ? ORDER BY create_dt DESC;";
         List<Post> postList = new ArrayList<>();
         try (
                 Connection con = ConnectionFactory.getConnection();
@@ -90,7 +90,7 @@ public class PostDao {
 
     // 키워드 검색 조회 => 제목 또는 내용
     public List<Post> getPostListByKeyword(String Keyword) {
-        String sql = "SELECT * FROM post_tb WHERE title LIKE ? or content LIKE ?;";
+        String sql = "SELECT * FROM post_tb WHERE title LIKE ? or content LIKE ? ORDER BY create_dt DESC;";
         List<Post> postList = new ArrayList<>();
         try (
                 Connection con = ConnectionFactory.getConnection();
@@ -106,7 +106,6 @@ public class PostDao {
             }
     } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
         return postList;
     }
@@ -130,17 +129,6 @@ public class PostDao {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
     public Post toPost(ResultSet rs) throws SQLException {
         return Post.builder()
                 .postId(rs.getInt("post_id"))
@@ -150,10 +138,4 @@ public class PostDao {
                 .createDt(rs.getTimestamp("create_dt").toLocalDateTime())
                 .build();
     }
-
-
-
-
-
-
 }

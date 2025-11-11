@@ -72,4 +72,14 @@ SELECT
 FROM
 	todo_tb
 WHERE
-	username LIKE "%ng%";
+	todo_id = 3;
+    
+INSERT INTO post_tb
+	(post_id, title, content, username, create_dt)
+VALUES
+	(0, "국내도서", "절창", "구병모", NOW());
+    
+SELECT
+	*
+FROM
+	post_tb;

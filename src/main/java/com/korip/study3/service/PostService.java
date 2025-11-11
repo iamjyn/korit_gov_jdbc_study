@@ -28,19 +28,15 @@ public class PostService {
     }
 
     // 제목 중복 확인
-    public boolean isValidDuplicatedTitle(String title) {
+    public boolean isDuplicatedTitle(String title) {
         Optional<Post> foundTitle = postDao.findPostByTitle(title);
         return foundTitle.isPresent();
     }
 
     // id로 단건 조회
-    public Post searchId(Integer id) {
-        Optional<Post> foundId = postDao.findPostById(id);
-        if (foundId.isEmpty()) {
-            System.out.println("해당 Id는 존재하지 않습니다.");
-            return null;
-        }
-        return foundId.get();
+    public Post searchById(Integer id) {
+        Optional<Post> foundPost = postDao.findPostById(id);
+        return foundPost.orElse(null);
     }
 
     // username으로 게시물 여러개 조회
@@ -52,5 +48,4 @@ public class PostService {
     public List<Post> searchPostKeyword(String keyword) {
         return postDao.getPostListByKeyword(keyword);
     }
-
 }
