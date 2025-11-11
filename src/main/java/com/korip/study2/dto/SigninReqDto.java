@@ -1,7 +1,6 @@
 package com.korip.study2.dto;
 
 import com.korip.study2.entity.User;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

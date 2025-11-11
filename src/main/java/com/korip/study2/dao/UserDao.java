@@ -13,8 +13,7 @@ import java.util.Optional;
 public class UserDao {
     private static UserDao instance;
 
-    private UserDao() {
-    }
+    private UserDao() {}
 
     public static UserDao getInstance() {
         if (instance == null) {
@@ -90,7 +89,7 @@ public class UserDao {
 
     // userList 전체 조회
     public List<GetUserListRespDto> getUserAllList() {
-        String sql = "SELECT * FROM user2_tb;";
+        String sql = "SELECT user_id, username, email, create_dt FROM user2_tb;";
         List<GetUserListRespDto> userList = new ArrayList<>();
         try (
                 Connection con = ConnectionFactory.getConnection();
@@ -107,22 +106,23 @@ public class UserDao {
     }
 
     // user - username으로 조회
-    public List<User> getUserListByUsername(String username) {
-        String sql = "SELECT * FROM user2_tb WHERE username LIKE ?;";
-        List<User> userList = new ArrayList<>();
+    public List<GetUserListRespDto> getUserListByUsername(String username) {
+        String sql = "SELECT user_id, username, email, create_dt FROM user2_tb WHERE username LIKE ?;";
+        List<GetUserListRespDto> userList = new ArrayList<>();
         try (
                 Connection con = ConnectionFactory.getConnection();
                 PreparedStatement ps = con.prepareStatement(sql);
         ){
-                ps.setString(1, username);
+                ps.setString(1, "%" + username + "%");
                 try (ResultSet rs = ps.executeQuery()){
-                    return rs.next() ? Collections.singletonList(toUser(rs)) : null;
+                    while (rs.next()) {
+                        userList.add(toGetUserListRespDto(rs));
+                    }
                 }
-
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return userList;
     }
 
     public User toUser(ResultSet rs) throws SQLException {

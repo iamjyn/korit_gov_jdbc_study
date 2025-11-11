@@ -63,13 +63,7 @@ public class UserService {
     }
 
     // 회원 검색
-    public User searchUser(String username) {
-        if (isValidDuplicatedUsername(username)) {
-            System.out.println(userDao.getUserListByUsername(username));
-        } else {
-            System.out.println("사용자 정보를 다시 확인하세요.");
-        }
-        return null;
+    public List<GetUserListRespDto> searchUser(String username) {
+        return userDao.getUserListByUsername(username);
     }
-
 }

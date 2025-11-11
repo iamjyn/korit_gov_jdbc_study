@@ -2,7 +2,6 @@ package com.korip.study2.dto;
 
 import com.korip.study2.entity.User;
 import com.korip.study2.util.PasswordEncoder;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;

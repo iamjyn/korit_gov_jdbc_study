@@ -1,11 +1,12 @@
 package com.korip.study2;
 
+import com.korip.study2.dto.GetUserListRespDto;
 import com.korip.study2.dto.SigninReqDto;
 import com.korip.study2.dto.SignupReqDto;
 import com.korip.study2.entity.User;
 import com.korip.study2.service.UserService;
-import com.korip.study2.util.PasswordEncoder;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -79,11 +80,12 @@ public class Main {
             } else if ("4".equals(selectMenu)) {
                 System.out.println("[ 회원 검색 ]");
                 System.out.print("회원명: ");
-                userService.searchUser(scanner.nextLine());
-                break;
+                String name = scanner.nextLine();
+                List<GetUserListRespDto> userListRespDtos = userService.searchUser(name);
+                userListRespDtos.forEach(System.out::println);
+
                 // todo: 회원 검색 메소드 호출
             }
         }
-
     }
 }
